@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          Factory(App\User::class,6)->create();
-        Factory(App\Post::class,2000)->create();
+        Factory(App\Post::class,50)->create();
         Factory(App\Category::class,10)->create();
     }
 }

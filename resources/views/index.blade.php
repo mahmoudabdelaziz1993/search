@@ -26,7 +26,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
 
-        <title>Laravel</title>
+        <title>Live Search with Ajax|page</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -418,22 +418,7 @@ margin-left: 310px;
 
 
             <!-- Dropdown-->
-            <li class="panel panel-default" id="dropdown">
-                <a data-toggle="collapse" href="#dropdown-lvl3">
-                    <span class="glyphicon glyphicon-dashboard"></span> Time <span class="caret"></span>
-                </a>
-
-                <!-- Dropdown level 1 -->
-                <div id="dropdown-lvl3" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <ul class="nav navbar-nav">
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-
-
-                                </div>
-                            </li>
+           
 
 
             <li class="panel panel-default" id="dropdown">
@@ -445,9 +430,21 @@ margin-left: 310px;
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                          @foreach($users as $user)
-                            <li><a href="#">{{$user->name}}</a></li>
-                          @endforeach
+                          <div class="userf">
+                          
+                          
+
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" value="ahmed">
+                          <label class="form-check-label users" for="exampleCheck1" >Ahmed{{""."(".$users->where("auther",'ahmed')->count().")"}}</label><br>
+
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" value="mahmoud">
+                          <label class="form-check-label users" for="exampleCheck1" >Mahmoud {{""."(".$users->where("auther",'mahmoud')->count().")"}}</label><br>
+
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" value="omar">
+                          <label class="form-check-label users" for="exampleCheck1" >Omar{{""."(".$users->where("auther",'omar')->count().")"}}</label><br>
+                        
+
+                          </div>
 
 
                                 </div>
@@ -462,9 +459,16 @@ margin-left: 310px;
                 <div id="dropdown-lvl2" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                          @foreach($cats as $cat)
-                            <li><a href="#">{{$cat->name}}</a></li>
+                          <div class="userf">
+
+                            @foreach($cats as $cat)
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                            value='{{$cat->id}}'>
+                            <label class="form-check-label cats" for="exampleCheck1" >{{$cat->name ." "."(".$cat->posts->count().")"}}</label><br>
                             @endforeach
+                            </div>
+
+
 
 
 
@@ -517,6 +521,87 @@ margin-left: 310px;
         $('.absolute-wrapper').removeClass('slide-in');
 
     });
+   //--------------------------------------------- make auther filter resulte ------
+  /* $('.userf ').click(function(){
+    $authers = [];
+    $('.userf :checked').each(function(){
+        
+        $auther = $(this).val();
+        $authers.push($auther);
+        console.log($authers)
+        $.ajax({
+
+               type : 'get',
+
+               url : 'cts',
+
+               data:{'cts':$authers},
+
+                  success:function(data){
+
+       $('#poo').html(data);
+
+    }
+});
+
+          });
+ });*/
+ //--------------------------------------------- make category filter resulte ------
+/*    $('.category ').click(function(){
+    $category = [];
+    $('.category :checked').each(function(){
+        $cat = $(this).val();
+        $category.push($cat);
+        console.log($category)
+        $.ajax({
+
+               type : 'get',
+
+               url : 'cats',
+
+               data:{'cts':$category},
+
+                  success:function(data){
+
+       $('#poo').html(data);
+       
+
+    
+
+      }
+
+
+      });});});  */
+//------------------------- if search start  if auther change
+
+$('#searchbox').on('keyup',function() {
+      $value=$(this).val();
+      console.log($value);
+       $('.userf ').click(function(){
+          $authers = [];
+    $('.userf :checked').each(function(){
+        
+        $auther = $(this).val();
+        $authers.push($auther);
+        console.log($authers);
+        $.ajax({
+
+               type : 'get',
+
+               url : 'searcha',
+
+               data:{'search':$value,"auth":$authers},
+
+                  success:function(data){
+
+       $('#poo').html(data);
+       }});
+      
+
+          });
+ });
+ });
+        //--------------------------------------------- search filter result ------      
     $('#searchbox').on('keyup',function() {
       $value=$(this).val();
       console.log($value);
@@ -531,13 +616,20 @@ margin-left: 310px;
                   success:function(data){
 
        $('#poo').html(data);
-
-}
-
-    });
+       }});});
 
 
-});
+
+
+
+
+
+
+
+
+
+
+
     });
 
         </script>

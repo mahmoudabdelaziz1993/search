@@ -32,12 +32,9 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->word,
         'body' => $faker->text,
-        'user_id' => function () {
-             return factory(App\User::class)->create()->id;
-        },
-        'category_id' => function () {
-             return factory(App\Category::class)->create()->id;
-        },
+        'auther' => $faker->word,
+        'user_id' =>  $faker->numberBetween($min = 1, $max = 5),
+        'category_id' =>  $faker->numberBetween($min = 1, $max = 10),
     ];
 });
 

@@ -8,8 +8,8 @@
                     </h2>
                 <h3 class="subheading">{{$posts->body}}</h3>
                 <span class="meta">Posted by
-                <a href="#">{{$posts->user->name}}</a> |
-                    {{$posts->created_at->diffForHumans()}}</span>
+                <a href="#">{{$posts->auther}}</a> |
+                    {{$posts->created_at->diffForHumans()}}</span>  |<a href="#">{{$posts->category->name}}</a> | Price ${{$posts->price}}</span>
 
             </div>
         </div>
